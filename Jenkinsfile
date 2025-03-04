@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Deploy to K8s') {
            steps {
-               withCredentials([credentialsId: 'KubernetesConfig']) {
+               withKubeConfig([credentialsId: 'KubernetesConfig']) {
                    sh '''
                       kubectl set image deployment/hello-world-deployment
                    '''
