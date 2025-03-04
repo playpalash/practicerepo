@@ -1,3 +1,0 @@
-this is sample text file for testing
-this is a commit made by master branch
-third commit for testing from master branch.
