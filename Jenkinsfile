@@ -3,6 +3,9 @@ pipeline {
     environment {
          DOCKER_REGISTRY = 'playpalash/application'
          DOCKER_REGISTRY_CREDENTIALS_ID = 'DockerHub'
+         APP_NAME = 'hello-world'
+         IMAGE_TAG = 'latest'
+         DEPLOYMENT_NAME = 'hello-world-application'
     }
     stages {
         stage('Checkout') {
@@ -35,10 +38,8 @@ pipeline {
         }
         stage('Deploy to K8s') {
            steps {
-               withKubeConfig([credentialsId: 'KubernetesConfig']) {
-                   sh '''
-                      kubectl set image deployment/hello-world-deployment
-                   '''
+               script {
+                   sh "kubectl set image deployment/$DEPLOYMENT_NAME $APP_NAME=$DOCKER_REGISTRY/$APP_NAME:$IMAGE_TAG"
                }
            }
         }
