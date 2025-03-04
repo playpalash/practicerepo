@@ -7,9 +7,16 @@ pipeline {
     stages {
         stage('Checkout') {
            steps {
-               git url: 'https://github.com/playpalash/practicerepo.git'
+               git url: 'https://github.com/playpalash/practicerepo.git', credentialsId: 'GitHub'
            }
         }
+
+        stage('List Workspace') {
+           steps {
+               sh 'ls -la'
+           }
+        }
+
         stage('Building Docker Image') {
            steps {
                script {
