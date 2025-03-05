@@ -40,7 +40,8 @@ pipeline {
            steps {
                script {
                    withKubeConfig([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                      sh "kubectl --kubeconfig=$KUBECONFIG" set image deployment/${DEPLOYMENT_NAME} ${APP_NAME}=${DOCKER_REGISTRY}/${APP_NAME}:${IMAGE_TAG}  --record"
+                     sh "kubectl get pods -A"
+                     #sh "kubectl --kubeconfig=$KUBECONFIG" set image deployment/${DEPLOYMENT_NAME} ${APP_NAME}=${DOCKER_REGISTRY}/${APP_NAME}:${IMAGE_TAG}  --record"
                    }
                }
            }
