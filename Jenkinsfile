@@ -39,7 +39,7 @@ pipeline {
         stage('Deploy to K8s') {
            steps {
                script {
-                   withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                   withKubeConfig([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                       sh "kubectl --kubeconfig=$KUBECONFIG" set image deployment/${DEPLOYMENT_NAME} ${APP_NAME}=${DOCKER_REGISTRY}/${APP_NAME}:${IMAGE_TAG}  --record"
                    }
                }
