@@ -39,7 +39,7 @@ pipeline {
         stage('Deploy to K8s') {
            steps {
                script {
-                   sh "kubectl set image deployment/$DEPLOYMENT_NAME $APP_NAME=$DOCKER_REGISTRY/$APP_NAME:$IMAGE_TAG"
+                   sh "kubectl set image deployment/${DEPLOYMENT_NAME} ${APP_NAME}=${DOCKER_REGISTRY}/${APP_NAME}:${IMAGE_TAG}"
                }
            }
         }
